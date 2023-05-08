@@ -1,3 +1,17 @@
-h1{
-    color: purple;
+table,
+td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+td {
+  width: 20px;
+  height: 20px;
+}
+table {
+  margin-bottom: 20px;
+}
+
+h1 {
+  color: purple;
+  font-weight: bold;
 }
