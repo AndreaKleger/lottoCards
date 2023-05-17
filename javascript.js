@@ -10,12 +10,23 @@ function createCards(playerId) {
     html = html + createOneCard(playerId, "card" + i);
   }
   document.getElementById(playerId).innerHTML = html;
+  let fields = document.querySelectorAll("td");
+  for (let i = 0; i < fields.length; i++) {
+    fields[i].addEventListener("click", function (event) {
+      event.stopPropagation();
+      if (fields[i].classList.contains("marked")) {
+        fields[i].classList.remove("marked");
+      } else {
+        fields[i].classList.add("marked");
+      }
+    });
+  }
 }
-function createOneCard(cardId) {
+function createOneCard(playerId, cardId) {
   card = new Array(nrOfRows * nrOfColumns).fill(0);
   defineIfHasNumberOrNot();
   setNumbers();
-  let html = createOneHtmlCard(cardId, 3, 10);
+  let html = createOneHtmlCard(playerId, cardId, 3, 10);
   return html;
 }
 
@@ -167,13 +178,23 @@ function setArrayValuesToZero(startIndex, endIndex) {
   }
 }
 
-function createOneHtmlCard(cardId, rows, columns) {
-  html = "<table id='" + cardId + "'>";
+function createOneHtmlCard(playerId, cardId, rows, columns) {
+  html = "<table id='" + playerId + "-" + cardId + "'>";
   index = 0;
   for (let i = 0; i < rows; i++) {
     html = html + "<tr>";
     for (let j = 0; j < columns; j++) {
-      html = html + "<td>" + card[index] + "</td>";
+      html =
+        html +
+        "<td id='" +
+        playerId +
+        "-" +
+        cardId +
+        "-field-" +
+        index +
+        "'>" +
+        card[index] +
+        "</td>";
       index++;
     }
     html = html + "</tr>";
